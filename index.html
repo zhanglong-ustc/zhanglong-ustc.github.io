@@ -3,426 +3,726 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Long Zhang (张龙)</title>
+  <title>Long Zhang (张龙) – Academic Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* ── Variables ── */
+    :root {
+      --purple: #330662;
+      --purple-mid: #5a189a;
+      --gold: #ffb81c;
+      --bg: #ffffff;
+      --text: #3a3a3a;
+      --text-light: #888;
+      --border: #e8e8e8;
+      --sidebar-w: 240px;
+      --content-w: 720px;
+    }
+
+    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 17px;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+    a { color: var(--purple-mid); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--gold); }
+    strong, b { font-weight: 700; }
+    em { font-style: italic; }
+
+    /* ── Layout ── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      width: var(--sidebar-w);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      padding: 48px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .avatar-wrap {
+      width: 148px; height: 148px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--purple);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .avatar-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .sidebar-name {
+      font-size: 20px; font-weight: 700;
+      color: #111; line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .sidebar-name-zh {
+      display: block;
+      font-size: 15px; font-weight: 400;
+      color: var(--text-light);
+    }
+    .sidebar-pos {
+      font-size: 13px; color: var(--text-light);
+      margin: 8px 0 4px;
+      font-family: 'Inter', sans-serif;
+    }
+    .sidebar-pos a { color: var(--purple-mid); font-weight: 600; }
+    .sidebar-email {
+      font-size: 12px; color: var(--text-light);
+      word-break: break-all;
+      margin-bottom: 18px;
+      font-family: 'Inter', sans-serif;
+    }
+    .sidebar-email a { color: var(--text-light); }
+    .sidebar-email a:hover { color: var(--gold); }
+
+    .sidebar-nav {
+      list-style: none;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .sidebar-nav li { margin: 2px 0; }
+    .sidebar-nav a {
+      display: block;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500;
+      color: var(--text-light);
+      transition: background .15s, color .15s;
+    }
+    .sidebar-nav a:hover {
+      background: rgba(51,6,98,0.07);
+      color: var(--purple);
+    }
+
+    .social-icons {
+      display: flex; gap: 10px; justify-content: center;
+      margin-top: auto; padding-top: 20px;
+    }
+    .social-icons a {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      color: var(--text-light);
       font-size: 14px;
-      color: #333;
-      background: #fff;
-      line-height: 1.65;
+      transition: all .15s;
     }
-    a { color: #0070c9; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ── Nav ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.82);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      height: 50px; padding: 0 44px;
-      display: flex; align-items: center; justify-content: space-between;
+    .social-icons a:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      background: rgba(51,6,98,0.05);
     }
-    .nav-brand { font-size: 16px; font-weight: 700; color: #222; }
-    .nav-links { list-style: none; display: flex; gap: 28px; }
-    .nav-links a { color: #444; font-size: 13px; font-weight: 500; }
-    .nav-links a:hover { color: #0070c9; text-decoration: none; }
+    .social-icons svg { width: 15px; height: 15px; }
 
-    /* ── Main ── */
-    main { max-width: 880px; margin: 0 auto; padding: 80px 28px 60px; }
+    /* ── Main Content ── */
+    main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      max-width: var(--content-w);
+      padding: 56px 52px 80px;
+    }
 
-    /* ── Section title ── */
+    /* ── Section ── */
+    .sec { margin-bottom: 52px; }
     .sec-title {
-      font-size: 20px; font-weight: 700; color: #1a1a1a;
-      margin: 52px 0 18px;
-      padding-bottom: 8px; border-bottom: 1px solid #ebebeb;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--purple);
+      display: inline-block;
     }
 
     /* ── About ── */
-    .about-wrap { display: flex; gap: 44px; align-items: flex-start; margin-top: 24px; }
-    .about-left { flex: 1; }
-    .about-right { flex-shrink: 0; }
-    .about-right img {
-      width: 155px; height: 195px; object-fit: cover;
-      border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      display: block;
-    }
-    .about-name { font-size: 26px; font-weight: 700; line-height: 1.3; }
-    .about-name-zh { font-size: 17px; font-weight: 400; color: #888; margin-left: 6px; }
-    .about-pos { font-size: 14px; color: #666; margin: 4px 0 14px; }
+    .about-text p { margin-bottom: 14px; font-size: 17px; color: #444; }
+    .about-text p:last-child { margin-bottom: 0; }
 
-    .about-list { list-style: none; margin-bottom: 14px; }
-    .about-list li {
-      padding-left: 18px; position: relative;
-      font-size: 13.5px; color: #444; margin-bottom: 7px;
+    .interest-row {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 18px;
     }
-    .about-list li::before { content:"•"; position:absolute; left:4px; color:#bbb; }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 16px; }
-    .tag {
-      background: rgba(0,0,0,0.04); color: rgba(0,0,0,0.58);
-      padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+    .chip {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 500;
+      padding: 4px 13px;
+      border-radius: 20px;
+      border: 1px solid rgba(51,6,98,0.25);
+      color: var(--purple-mid);
+      background: rgba(51,6,98,0.04);
+      transition: all .15s;
+    }
+    .chip:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
     }
 
-    .btns { display: flex; flex-wrap: wrap; gap: 7px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 13px; border: 1px solid rgba(0,0,0,0.16);
-      border-radius: 6px; font-size: 12px; color: #333;
-      background: #fff; transition: background 0.12s;
+    /* ── Stats ── */
+    .stats-row {
+      display: flex; gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      margin-top: 24px;
     }
-    .btn:hover { background: #f4f4f4; text-decoration: none; color: #333; }
-
-    /* ── Citation stats ── */
-    .stats-bar {
-      display: flex; gap: 0; margin-top: 18px;
-      border: 1px solid #ebebeb; border-radius: 10px; overflow: hidden;
+    .stat-box {
+      flex: 1; text-align: center;
+      padding: 14px 10px;
+      border-right: 1px solid var(--border);
     }
-    .stat {
-      flex: 1; text-align: center; padding: 12px 8px;
-      border-right: 1px solid #ebebeb;
+    .stat-box:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--purple);
     }
-    .stat:last-child { border-right: none; }
-    .stat-val { font-size: 22px; font-weight: 700; color: #0070c9; }
-    .stat-lbl { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .stat-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; color: var(--text-light);
+      margin-top: 2px;
+    }
 
     /* ── Education ── */
-    .edu-list { display: flex; flex-direction: column; gap: 14px; }
-    .edu-item { display: flex; gap: 14px; align-items: flex-start; }
-    .edu-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-      border-radius: 8px; background: #f5f5f5;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
+    .edu-item {
+      display: flex; gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
     }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-logo {
+      width: 52px; height: 52px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fafafa;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .edu-logo img { width: 48px; height: 48px; object-fit: contain; }
     .edu-body { flex: 1; }
-    .edu-school { font-weight: 600; font-size: 14px; color: #1a1a1a; }
-    .edu-degree { font-size: 13px; color: #666; margin-top: 2px; }
-    .edu-time { font-size: 12px; color: #bbb; margin-top: 2px; }
-    .edu-awards { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
-    .edu-award {
-      font-size: 11px; padding: 2px 9px;
-      background: #fff8e1; color: #b8860b;
-      border-radius: 4px; border: 1px solid #f0d88a;
+    .edu-school {
+      font-size: 16px; font-weight: 700;
+      color: #111; line-height: 1.3;
+    }
+    .edu-degree {
+      font-size: 14px; color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      margin: 3px 0;
+    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+    .badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px; font-weight: 500;
+      padding: 3px 10px; border-radius: 4px;
+      background: rgba(255,184,28,0.12);
+      color: #9a6b00;
+      border: 1px solid rgba(255,184,28,0.35);
     }
 
     /* ── News ── */
-    .news-list { display: flex; flex-direction: column; gap: 9px; }
-    .news-row { display: flex; gap: 14px; align-items: baseline; }
-    .news-date { flex-shrink: 0; width: 95px; font-size: 12px; color: #bbb; font-weight: 600; }
-    .news-text { font-size: 13.5px; color: #444; flex: 1; }
-    .news-text .venue { font-weight: 700; color: rgba(0,0,0,0.72); }
-    .news-text .hl { font-style: italic; }
+    .news-item {
+      display: flex; gap: 16px;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px solid #f4f4f4;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px; font-weight: 600;
+      color: var(--text-light);
+      flex-shrink: 0; width: 80px;
+      letter-spacing: 0.03em;
+    }
+    .news-body { font-size: 15.5px; color: #444; flex: 1; }
+    .news-body .venue-tag {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 700;
+      padding: 1px 7px; border-radius: 3px;
+      background: var(--purple); color: #fff;
+      margin-left: 3px; vertical-align: middle;
+    }
 
     /* ── Publications ── */
-    .pub-note { font-size: 12.5px; color: #aaa; margin-bottom: 6px; }
-    .yr-label { font-size: 16px; font-weight: 700; color: #666; margin: 26px 0 12px; }
+    .yr-group { margin-bottom: 4px; }
+    .yr-head {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      margin: 28px 0 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .yr-head::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--border);
+    }
+
     article.pub {
-      display: flex; gap: 16px; align-items: flex-start;
-      padding: 14px 0; border-bottom: 1px solid #f2f2f2;
+      display: flex; gap: 20px;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid #f2f2f2;
+      transition: background .1s;
     }
     article.pub:last-child { border-bottom: none; }
-    .pub-thumb {
-      flex-shrink: 0; width: 108px; height: 76px;
-      border-radius: 6px; overflow: hidden;
-      background: linear-gradient(135deg,#e8f4fd,#c7e4f8);
-      display: flex; align-items: center; justify-content: center; font-size: 26px;
+    article.pub:hover { background: rgba(51,6,98,0.015); margin: 0 -12px; padding: 18px 12px; border-radius: 8px; }
+
+    .pub-img-wrap {
+      flex-shrink: 0;
+      width: 160px;
+      position: relative;
     }
+    .pub-img-wrap img {
+      width: 160px; height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: rgb(136,136,136) 3px 3px 6px;
+      display: block;
+    }
+    .conf-badge {
+      position: absolute;
+      top: 7px; left: 7px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 700;
+      color: #fff;
+      background: var(--purple);
+      padding: 2px 7px; border-radius: 3px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
+    .conf-badge.arxiv-badge { background: #c0392b; }
+
     .pub-body { flex: 1; }
-    .pub-title { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.45; margin-bottom: 5px; }
-    .pub-badge {
-      display: inline-block; font-size: 11.5px; font-weight: 700;
-      color: #fff; background: #0070c9;
-      padding: 2px 9px; border-radius: 4px; margin-bottom: 5px;
+    .pub-title {
+      font-size: 16px; font-weight: 700;
+      color: #111; line-height: 1.4;
+      margin-bottom: 5px;
     }
-    .pub-badge.arxiv { background: #c0392b; }
-    .pub-badge.prcv  { background: #7d3c98; }
-    .pub-authors { font-size: 12.5px; color: #777; margin-bottom: 6px; line-height: 1.5; }
-    .pub-authors b { color: #1a1a1a; }
-    .pub-links { display: flex; gap: 7px; flex-wrap: wrap; }
-    .pub-link {
-      font-size: 12px; padding: 2px 11px;
-      border: 1px solid rgba(0,112,201,0.3); border-radius: 4px; color: #0070c9;
+    .pub-title a { color: #111; }
+    .pub-title a:hover { color: var(--purple-mid); }
+    .pub-authors {
+      font-size: 14px; color: #666;
+      line-height: 1.6; margin-bottom: 8px;
     }
-    .pub-link:hover { background: #e8f3fc; text-decoration: none; }
+    .pub-authors b { color: #222; }
+    .pub-venue-text {
+      font-style: italic; font-size: 14px;
+      color: var(--text-light); margin-bottom: 10px;
+    }
+    .pub-venue-text strong { font-style: normal; font-weight: 700; color: #333; }
+    .pub-btns { display: flex; gap: 7px; flex-wrap: wrap; }
+    .pub-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px; font-weight: 500;
+      padding: 3px 12px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      color: #333;
+      transition: all .15s;
+    }
+    .pub-btn:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
 
     /* ── Awards ── */
-    .award-list { display: flex; flex-direction: column; gap: 10px; }
-    .award-row { display: flex; gap: 14px; align-items: baseline; }
-    .award-yr { flex-shrink: 0; width: 50px; font-size: 13px; font-weight: 700; color: #bbb; }
-    .award-body { flex: 1; }
-    .award-name { font-weight: 600; font-size: 13.5px; color: #1a1a1a; }
-    .award-org  { font-size: 12px; color: #aaa; margin-top: 2px; }
+    .award-item {
+      display: flex; gap: 18px;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid #f4f4f4;
+    }
+    .award-item:last-child { border-bottom: none; }
+    .award-yr {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--text-light);
+      flex-shrink: 0; width: 44px;
+    }
+    .award-name { font-size: 16px; font-weight: 600; color: #111; }
+    .award-org {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; color: var(--text-light);
+      margin-top: 2px;
+    }
 
     /* ── Footer ── */
     footer {
-      text-align: center; padding: 44px 20px;
-      color: #bbb; font-size: 13px; font-style: italic;
-      border-top: 1px solid #f0f0f0; margin-top: 64px;
+      background: #1c1c1c;
+      color: #888;
+      text-align: center;
+      padding: 28px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      margin-left: var(--sidebar-w);
     }
 
-    @media (max-width: 580px) {
-      .about-wrap { flex-direction: column-reverse; }
-      .about-right img { width: 120px; height: 150px; }
-      nav { padding: 0 16px; }
-      .nav-links { gap: 14px; }
-      main { padding: 70px 16px 40px; }
+    /* ── Responsive ── */
+    @media (max-width: 760px) {
+      aside { display: none; }
+      main { margin-left: 0; padding: 32px 20px 60px; max-width: 100%; }
+      footer { margin-left: 0; }
+      .pub-img-wrap { width: 110px; }
+      .pub-img-wrap img { width: 110px; height: 70px; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-brand" href="#">Long Zhang</a>
-  <ul class="nav-links">
-    <li><a href="#">HOME</a></li>
-    <li><a href="#edu">Education</a></li>
-    <li><a href="#news">News</a></li>
-    <li><a href="#pub">Publications</a></li>
-    <li><a href="#awards">Awards</a></li>
-  </ul>
-</nav>
+<div class="layout">
 
-<main>
-
-  <!-- ═══ About ═══ -->
-  <section id="about">
-    <div class="about-wrap">
-      <div class="about-left">
-        <p class="about-name">Long Zhang <span class="about-name-zh">（张龙）</span></p>
-        <p class="about-pos">Engineer @ Kuaishou Inc. &nbsp;|&nbsp; USTC</p>
-
-        <ul class="about-list">
-          <li>Researcher at <strong>Kuaishou Inc.</strong>, working on multimodal large language models, agent systems, recommendation, and multimedia understanding.</li>
-          <li>M.Eng. from <strong>University of Science and Technology of China (USTC)</strong>; B.Eng. from <strong>Hefei University of Technology (HFUT)</strong>.</li>
-          <li>Research interests: <strong>Agentic RL</strong>, <strong>Multimodal LLM</strong>, <strong>Recommendation Systems</strong>, <strong>Multimedia Understanding</strong>.</li>
-          <li>Email: <a href="mailto:dragonzhang@mail.ustc.edu.cn">dragonzhang@mail.ustc.edu.cn</a></li>
-        </ul>
-
-        <div class="tags">
-          <span class="tag">Agent RL</span>
-          <span class="tag">MLLM</span>
-          <span class="tag">Recommendation</span>
-          <span class="tag">Multimedia</span>
-          <span class="tag">Video Understanding</span>
-        </div>
-
-        <div class="btns">
-          <a class="btn" href="#pub">📄 Publications</a>
-          <a class="btn" href="mailto:dragonzhang@mail.ustc.edu.cn">✉️ Email</a>
-          <a class="btn" href="https://scholar.google.com/citations?user=PKlSRUIAAAAJ" target="_blank">🎓 Google Scholar</a>
-        </div>
-      </div>
-
-      <div class="about-right">
-        <!-- 使用谷歌学术头像 -->
-        <img
-          src="https://scholar.googleusercontent.com/citations?view_op=view_photo&user=PKlSRUIAAAAJ&citpid=1"
-          alt="Long Zhang profile photo"
-        />
-      </div>
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside>
+    <div class="avatar-wrap">
+      <img src="https://scholar.googleusercontent.com/citations?view_op=view_photo&user=PKlSRUIAAAAJ&citpid=1"
+           alt="Long Zhang profile photo" />
     </div>
 
-    <!-- Stats -->
-    <div class="stats-bar">
-      <div class="stat"><div class="stat-val">64</div><div class="stat-lbl">Total Citations</div></div>
-      <div class="stat"><div class="stat-val">5</div><div class="stat-lbl">h-index</div></div>
-      <div class="stat"><div class="stat-val">5</div><div class="stat-lbl">i10-index</div></div>
-      <div class="stat"><div class="stat-val">7</div><div class="stat-lbl">Publications</div></div>
-    </div>
-  </section>
+    <p class="sidebar-name">
+      Long Zhang
+      <span class="sidebar-name-zh">张龙</span>
+    </p>
+    <p class="sidebar-pos">
+      Engineer @&nbsp;<a href="https://www.kuaishou.com" target="_blank">Kuaishou</a>
+    </p>
+    <p class="sidebar-email">
+      <a href="mailto:dragonzhang@mail.ustc.edu.cn">dragonzhang@mail.ustc.edu.cn</a>
+    </p>
 
-  <!-- ═══ Education ═══ -->
-  <section id="edu">
-    <h2 class="sec-title">Education</h2>
-    <div class="edu-list">
+    <ul class="sidebar-nav">
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#edu">Education</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#pub">Publications</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+
+    <div class="social-icons">
+      <!-- Google Scholar -->
+      <a href="https://scholar.google.com/citations?user=PKlSRUIAAAAJ" target="_blank" title="Google Scholar">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5h4.5v9H9V12h6v6.5h4.5V9.5H24z"/></svg>
+      </a>
+      <!-- Email -->
+      <a href="mailto:dragonzhang@mail.ustc.edu.cn" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main>
+
+    <!-- About Me -->
+    <section class="sec" id="about">
+      <h2 class="sec-title">About Me</h2>
+      <div class="about-text">
+        <p>
+          I am an engineer at <a href="https://www.kuaishou.com" target="_blank"><strong>Kuaishou Inc.</strong></a>,
+          working on multimodal large language models, agentic systems, and recommendation.
+          I received my M.Eng. from the <a href="https://en.ustc.edu.cn" target="_blank"><strong>University of Science and Technology of China (USTC)</strong></a>
+          in 2026, where I was honored as an <strong>Outstanding Graduate</strong> and received the <strong>National Scholarship</strong>.
+        </p>
+        <p>
+          Prior to that, I obtained my B.Eng. from <a href="https://www.hfut.edu.cn" target="_blank"><strong>Hefei University of Technology (HFUT)</strong></a>
+          in 2023, graduating <strong>ranked #1 in my major</strong> and receiving the <strong>National Scholarship for Undergraduates</strong>.
+        </p>
+        <p>
+          My research interests lie at the intersection of <strong>Agentic Reinforcement Learning</strong>,
+          <strong>Multimodal LLMs</strong>, <strong>Multimedia Understanding</strong>, and <strong>Recommendation Systems</strong>.
+        </p>
+      </div>
+
+      <div class="interest-row">
+        <span class="chip">Agent RL</span>
+        <span class="chip">Multimodal LLM</span>
+        <span class="chip">Video Understanding</span>
+        <span class="chip">Recommendation</span>
+        <span class="chip">Multimedia</span>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-n">64</div>
+          <div class="stat-lbl">Citations</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">5</div>
+          <div class="stat-lbl">h-index</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">5</div>
+          <div class="stat-lbl">i10-index</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">7</div>
+          <div class="stat-lbl">Publications</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="sec" id="edu">
+      <h2 class="sec-title">Education</h2>
+
       <div class="edu-item">
-        <div class="edu-icon">🎓</div>
+        <div class="edu-logo">
+          <img src="assets/img/schools/ustc.png" alt="USTC logo" />
+        </div>
         <div class="edu-body">
-          <div class="edu-school">University of Science and Technology of China (USTC)</div>
-          <div class="edu-degree">M.Eng. · Information &amp; Communication Engineering</div>
-          <div class="edu-time">Graduated 2023</div>
-          <div class="edu-awards">
-            <span class="edu-award">🏅 National Scholarship for Graduate Students</span>
-            <span class="edu-award">⭐ Outstanding Graduate</span>
+          <div class="edu-school">University of Science and Technology of China</div>
+          <div class="edu-degree">M.Eng. · Information &amp; Communication Engineering · 2023–2026</div>
+          <div class="badge-row">
+            <span class="badge">🏅 National Scholarship</span>
+            <span class="badge">⭐ Outstanding Graduate</span>
           </div>
         </div>
       </div>
 
       <div class="edu-item">
-        <div class="edu-icon">🎓</div>
+        <div class="edu-logo">
+          <img src="assets/img/schools/hfut.png" alt="HFUT logo" />
+        </div>
         <div class="edu-body">
-          <div class="edu-school">Hefei University of Technology (HFUT)</div>
-          <div class="edu-degree">B.Eng. · Ranking #1 in Major</div>
-          <div class="edu-time">Graduated 2020</div>
-          <div class="edu-awards">
-            <span class="edu-award">🏅 National Scholarship for Undergraduates</span>
-            <span class="edu-award">⭐ Major Rank #1</span>
+          <div class="edu-school">Hefei University of Technology</div>
+          <div class="edu-degree">B.Eng. · 2019–2023</div>
+          <div class="badge-row">
+            <span class="badge">🏅 National Scholarship</span>
+            <span class="badge">⭐ Major Rank #1</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ News ═══ -->
-  <section id="news">
-    <h2 class="sec-title">News</h2>
-    <div class="news-list">
-      <div class="news-row">
-        <span class="news-date">2026</span>
-        <span class="news-text"><span class="hl">"ReST"</span> accepted at <span class="venue">ACM SIGIR 2026</span>!</span>
+    <!-- News -->
+    <section class="sec" id="news">
+      <h2 class="sec-title">News</h2>
+
+      <div class="news-item">
+        <span class="news-date">2026.06</span>
+        <span class="news-body">🎉 Paper <em>ReST</em> accepted at <span class="venue-tag">SIGIR 2026</span></span>
       </div>
-      <div class="news-row">
+      <div class="news-item">
+        <span class="news-date">2025.09</span>
+        <span class="news-body">🎉 Paper <em>Enhancing Partially Relevant Video Retrieval</em> accepted at <span class="venue-tag">EMNLP 2025</span></span>
+      </div>
+      <div class="news-item">
         <span class="news-date">2025</span>
-        <span class="news-text"><span class="hl">"Enhancing partially relevant video retrieval"</span> accepted at <span class="venue">EMNLP 2025</span>!</span>
+        <span class="news-body">✨ Two papers accepted at <span class="venue-tag">IEEE TMM</span> and <span class="venue-tag">IEEE T-CSVT</span></span>
       </div>
-      <div class="news-row">
-        <span class="news-date">2025</span>
-        <span class="news-text">Two papers accepted at <span class="venue">IEEE Transactions on Multimedia</span> and <span class="venue">IEEE T-CSVT</span>.</span>
+    </section>
+
+    <!-- Publications -->
+    <section class="sec" id="pub">
+      <h2 class="sec-title">Publications</h2>
+      <p style="font-family:'Inter',sans-serif;font-size:12px;color:#aaa;margin-bottom:0;">* Equal contribution</p>
+
+      <!-- 2026 -->
+      <div class="yr-group">
+        <div class="yr-head">2026</div>
+
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/prvr_align_sm.png" alt="ReST paper teaser" />
+            <span class="conf-badge">SIGIR 2026</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              <a href="https://dl.acm.org/doi/abs/10.1145/3805712.3808510" target="_blank">
+                ReST: A Plug-and-Play Spatially-Constrained Representation Enhancement Framework for Local-Life Recommendation
+              </a>
+            </div>
+            <div class="pub-authors">H Jiang, <b>L Zhang</b>, G Wang, S Yu, Y Zeng, W Zeng, F Pan, P Jiang, G Zhou</div>
+            <div class="pub-venue-text"><em>Proc. 49th Intl. ACM <strong>SIGIR</strong> Conference</em>, 2026</div>
+            <div class="pub-btns">
+              <a class="pub-btn" href="https://dl.acm.org/doi/abs/10.1145/3805712.3808510" target="_blank">PDF</a>
+            </div>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
 
-  <!-- ═══ Publications ═══ -->
-  <section id="pub">
-    <h2 class="sec-title">Publications</h2>
-    <p class="pub-note">(* joint first authors)</p>
+      <!-- 2025 -->
+      <div class="yr-group">
+        <div class="yr-head">2025</div>
 
-    <!-- 2026 -->
-    <div class="yr-label">2026</div>
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/prvr_active_sm.png" alt="TMM paper" />
+            <span class="conf-badge">IEEE TMM</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              <a href="https://ieeexplore.ieee.org/abstract/document/11086387/" target="_blank">
+                Towards Efficient Partially Relevant Video Retrieval with Active Moment Discovering
+              </a>
+            </div>
+            <div class="pub-authors">P Song, <b>L Zhang</b>, L Lan, W Chen, D Guo, X Yang, M Wang</div>
+            <div class="pub-venue-text"><em><strong>IEEE Transactions on Multimedia</strong></em>, 2025</div>
+            <div class="pub-btns">
+              <a class="pub-btn" href="https://ieeexplore.ieee.org/abstract/document/11086387/" target="_blank">PDF</a>
+            </div>
+          </div>
+        </article>
 
-    <article class="pub">
-      <div class="pub-thumb">📊</div>
-      <div class="pub-body">
-        <div class="pub-title">ReST: A Plug-and-Play Spatially-Constrained Representation Enhancement Framework for Local-Life Recommendation</div>
-        <span class="pub-badge">SIGIR 2026</span>
-        <div class="pub-authors">H Jiang, <b>L Zhang</b>, G Wang, S Yu, Y Zeng, W Zeng, F Pan, P Jiang, G Zhou</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3805712.3808510" target="_blank">paper</a>
-        </div>
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/prvr_align_sm.png" alt="T-CSVT paper" />
+            <span class="conf-badge">IEEE T-CSVT</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              <a href="https://ieeexplore.ieee.org/abstract/document/10843770/" target="_blank">
+                Video Corpus Moment Retrieval with Query-Specific Context Learning and Progressive Localization
+              </a>
+            </div>
+            <div class="pub-authors"><b>L Zhang</b>, P Song, Z Duan, S Wang, X Chang, X Yang</div>
+            <div class="pub-venue-text"><em><strong>IEEE Transactions on Circuits and Systems for Video Technology</strong></em>, Vol. 35(6), 2025</div>
+            <div class="pub-btns">
+              <a class="pub-btn" href="https://ieeexplore.ieee.org/abstract/document/10843770/" target="_blank">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/prvr_align_sm.png" alt="EMNLP paper" />
+            <span class="conf-badge">EMNLP 2025</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              Enhancing Partially Relevant Video Retrieval with Robust Alignment Learning
+            </div>
+            <div class="pub-authors"><b>L Zhang</b>, P Song, J Dong, K Li, X Yang</div>
+            <div class="pub-venue-text"><em>Conf. on Empirical Methods in Natural Language Processing (<strong>EMNLP</strong>)</em>, 2025</div>
+            <div class="pub-btns">
+              <a class="pub-btn" href="https://arxiv.org/abs/2509.01383" target="_blank">arXiv</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/teleego_sm.png" alt="TeleEgo paper" />
+            <span class="conf-badge arxiv-badge">arXiv</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              <a href="https://arxiv.org/abs/2510.23981" target="_blank">
+                TeleEgo: Benchmarking Egocentric AI Assistants in the Wild
+              </a>
+            </div>
+            <div class="pub-authors">J Yan, R Ren, J Liu, S Xu, L Wang, Y Wang, X Zhong, Y Wang, <b>L Zhang</b>, et al.</div>
+            <div class="pub-venue-text"><em>arXiv preprint arXiv:2510.23981</em>, 2025</div>
+            <div class="pub-btns">
+              <a class="pub-btn" href="https://arxiv.org/abs/2510.23981" target="_blank">arXiv</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/videomem_sm.png" alt="Video-EM paper" />
+            <span class="conf-badge arxiv-badge">arXiv</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              <a href="https://arxiv.org/abs/2508.09486" target="_blank">
+                Episodic Memory Representation for Long-Form Video Understanding
+              </a>
+            </div>
+            <div class="pub-authors">Y Wang, <b>L Zhang</b>, J Liu, J Yan, Z Zhang, J Zheng, X Yang, D Wu, X Chen, et al.</div>
+            <div class="pub-venue-text"><em>arXiv preprint arXiv:2508.09486</em>, 2025</div>
+            <div class="pub-btns">
+              <a class="pub-btn" href="https://arxiv.org/abs/2508.09486" target="_blank">arXiv</a>
+            </div>
+          </div>
+        </article>
       </div>
-    </article>
 
-    <!-- 2025 -->
-    <div class="yr-label">2025</div>
+      <!-- 2022 -->
+      <div class="yr-group">
+        <div class="yr-head">2022</div>
 
-    <article class="pub">
-      <div class="pub-thumb">🎬</div>
-      <div class="pub-body">
-        <div class="pub-title">Towards Efficient Partially Relevant Video Retrieval with Active Moment Discovering</div>
-        <span class="pub-badge">IEEE Trans. Multimedia 2025</span>
-        <div class="pub-authors">P Song, <b>L Zhang</b>, L Lan, W Chen, D Guo, X Yang, M Wang</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11086387/" target="_blank">paper</a>
-        </div>
+        <article class="pub">
+          <div class="pub-img-wrap">
+            <img src="assets/img/papers/prvr_active_sm.png" alt="PRCV paper" />
+            <span class="conf-badge">PRCV 2022</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              A Local-Global Self-attention Interaction Network for RGB-D Cross-Modal Person Re-identification
+            </div>
+            <div class="pub-authors">C Zhu, X Li, M Qi, Y Liu, <b>L Zhang</b></div>
+            <div class="pub-venue-text"><em>Chinese Conf. on Pattern Recognition and Computer Vision (<strong>PRCV</strong>)</em>, pp. 89–102, 2022</div>
+            <div class="pub-btns"></div>
+          </div>
+        </article>
       </div>
-    </article>
+    </section>
 
-    <article class="pub">
-      <div class="pub-thumb">🎬</div>
-      <div class="pub-body">
-        <div class="pub-title">Video Corpus Moment Retrieval with Query-Specific Context Learning and Progressive Localization</div>
-        <span class="pub-badge">IEEE T-CSVT 2025</span>
-        <div class="pub-authors"><b>L Zhang</b>, P Song, Z Duan, S Wang, X Chang, X Yang</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10843770/" target="_blank">paper</a>
-        </div>
-      </div>
-    </article>
+    <!-- Awards -->
+    <section class="sec" id="awards">
+      <h2 class="sec-title">Awards &amp; Honors</h2>
 
-    <article class="pub">
-      <div class="pub-thumb">🎬</div>
-      <div class="pub-body">
-        <div class="pub-title">Enhancing Partially Relevant Video Retrieval with Robust Alignment Learning</div>
-        <span class="pub-badge">EMNLP 2025</span>
-        <div class="pub-authors"><b>L Zhang</b>, P Song, J Dong, K Li, X Yang</div>
-        <div class="pub-links">
-          <!-- EMNLP ACL Anthology link if available -->
-        </div>
-      </div>
-    </article>
-
-    <article class="pub">
-      <div class="pub-thumb">👁️</div>
-      <div class="pub-body">
-        <div class="pub-title">TeleEgo: Benchmarking Egocentric AI Assistants in the Wild</div>
-        <span class="pub-badge arxiv">arXiv 2025</span>
-        <div class="pub-authors">J Yan, R Ren, J Liu, S Xu, L Wang, Y Wang, X Zhong, Y Wang, <b>L Zhang</b>, et al.</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/abs/2510.23981" target="_blank">paper</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="pub">
-      <div class="pub-thumb">📹</div>
-      <div class="pub-body">
-        <div class="pub-title">Episodic Memory Representation for Long-Form Video Understanding</div>
-        <span class="pub-badge arxiv">arXiv 2025</span>
-        <div class="pub-authors">Y Wang, <b>L Zhang</b>, J Liu, J Yan, Z Zhang, J Zheng, X Yang, D Wu, X Chen, et al.</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/abs/2508.09486" target="_blank">paper</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2022 -->
-    <div class="yr-label">2022</div>
-
-    <article class="pub">
-      <div class="pub-thumb">🔍</div>
-      <div class="pub-body">
-        <div class="pub-title">A Local-Global Self-attention Interaction Network for RGB-D Cross-Modal Person Re-identification</div>
-        <span class="pub-badge prcv">PRCV 2022</span>
-        <div class="pub-authors">C Zhu, X Li, M Qi, Y Liu, <b>L Zhang</b></div>
-        <div class="pub-links"></div>
-      </div>
-    </article>
-
-  </section>
-
-  <!-- ═══ Awards ═══ -->
-  <section id="awards">
-    <h2 class="sec-title">Awards &amp; Honors</h2>
-    <div class="award-list">
-      <div class="award-row">
-        <span class="award-yr">2023</span>
-        <div class="award-body">
-          <div class="award-name">National Scholarship for Graduate Students</div>
-          <div class="award-org">University of Science and Technology of China (USTC)</div>
-        </div>
-      </div>
-      <div class="award-row">
-        <span class="award-yr">2023</span>
-        <div class="award-body">
+      <div class="award-item">
+        <span class="award-yr">2026</span>
+        <div>
           <div class="award-name">Outstanding Graduate</div>
           <div class="award-org">University of Science and Technology of China (USTC)</div>
         </div>
       </div>
-      <div class="award-row">
-        <span class="award-yr">2020</span>
-        <div class="award-body">
+      <div class="award-item">
+        <span class="award-yr">2025</span>
+        <div>
+          <div class="award-name">National Scholarship for Graduate Students</div>
+          <div class="award-org">University of Science and Technology of China (USTC)</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <span class="award-yr">2023</span>
+        <div>
+          <div class="award-name">Outstanding Undergraduate Graduate · Major Rank #1</div>
+          <div class="award-org">Hefei University of Technology (HFUT)</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <span class="award-yr">2022</span>
+        <div>
           <div class="award-name">National Scholarship for Undergraduates</div>
           <div class="award-org">Hefei University of Technology (HFUT)</div>
         </div>
       </div>
-      <div class="award-row">
-        <span class="award-yr">2020</span>
-        <div class="award-body">
-          <div class="award-name">Major Rank #1 · Outstanding Undergraduate Graduate</div>
-          <div class="award-org">Hefei University of Technology (HFUT)</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+  </main>
+</div>
 
 <footer>
-  &copy; 2025 Long Zhang &nbsp;·&nbsp; Last updated July 2025
+  © 2026 Long Zhang &nbsp;·&nbsp; Last updated July 2026 &nbsp;·&nbsp;
+  <a href="https://scholar.google.com/citations?user=PKlSRUIAAAAJ" target="_blank" style="color:#888;">Google Scholar</a>
 </footer>
 
 </body>
