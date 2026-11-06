@@ -1,0 +1,26 @@
+Original homepage material — copyright and use
+
+Copyright © 2026 Long Zhang. All rights reserved in original material owned by
+Long Zhang, to the extent protected by applicable law.
+
+Except as permitted by applicable law or a separate written permission,
+this notice does not grant a license to copy, adapt or redistribute the
+protected original website code, text or graphics, including as a republished
+website template. Please contact dragonzhang@mail.ustc.edu.cn for permission.
+
+Linking to the website and its papers is welcome. This notice does not restrict
+lawful academic citation, quotation or other applicable statutory exceptions.
+Research papers and publication materials remain subject to their respective
+authors', publishers' and repositories' terms.
+
+Third-party components, logos and other materials are excluded from this
+reservation of rights and retain their own licenses and ownership:
+- Three.js 0.134.0: MIT; assets/vendor/THREE-LICENSE.txt.
+- Vanta 0.5.24: MIT; assets/vendor/VANTA-LICENSE.txt.
+- Kuaishou and university logos: their respective owners; used for identification.
+- Fonts and externally provided visitor statistics: their respective providers.
+
+This notice claims no exclusive rights over general layout ideas, colors,
+methods, common animation concepts or independently created implementations.
+It is not a blanket MIT license for the website. See copyright.html for links
+and the public-facing explanation.

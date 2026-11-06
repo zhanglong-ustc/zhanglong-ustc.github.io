@@ -1,0 +1,2 @@
+/*! Original homepage code © 2026 Long Zhang. See copyright.html for scope and third-party notices. */
+(function(i){"use strict";function o(n){return String(n||"").toLowerCase().replace(/\s+/g," ").trim()}function u(n,e){return e=e||{},(!e.year||e.year==="all"||String(n.year)===String(e.year))&&(!e.topic||e.topic==="all"||n.topics.includes(e.topic))&&(!o(e.query)||o(n.text).includes(o(e.query)))}const t={matchesPublication:u};typeof module<"u"&&module.exports?module.exports=t:i.PublicationFilter=t})(typeof window<"u"?window:globalThis);
